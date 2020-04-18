@@ -47,4 +47,12 @@ public class InfoCenterServiceImplTest {
         assertThat(actualResult.toString()).containsPattern(TABLE_INFO_PATTERN);
     }
 
+    @Test
+    public void shouldReturnInfoFilteredByDeparture() {
+        FlightsInfo actualResult = infoCenterService.getFlightsFrom(ISTANBUL);
+
+        assertThat(actualResult.toString()).containsPattern(TABLE_INFO_PATTERN);
+        assertThat(actualResult.toString()).containsPattern(ISTANBUL);
+    }
+
 }

@@ -8,8 +8,8 @@ public final class Constants {
     public static final String PRAGUE = "Prague";
 
     //Flight numbers
-    public static final int FLIGHT_NO_101 = 101;
-    public static final int FLIGHT_NO_102 = 102;
+    public static final Long FLIGHT_NO_101 = 101L;
+    public static final Long FLIGHT_NO_102 = 102L;
 
     private Constants() {
         throw new UnsupportedOperationException();

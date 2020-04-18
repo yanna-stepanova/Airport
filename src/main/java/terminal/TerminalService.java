@@ -21,7 +21,7 @@ public interface TerminalService {
     Set<Flight> getAllFlights();
 
     /**
-     * Возвращает все рейсы, у который станция отправления равна <code>departure</code>
+     * Возвращает все рейсы, у которых станция отправления равна <code>departure</code>
      *
      * @param departure - станция отправления
      * @return рейсы, кторые отправляются с <code>departure</code>

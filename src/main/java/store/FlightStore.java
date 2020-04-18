@@ -4,6 +4,7 @@ import model.Flight;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import static store.Cities.BERLIN;
 import static store.Cities.ISTANBUL;
@@ -51,7 +52,26 @@ public final class FlightStore {
         return null;
     }
 
-    private FlightStore(){
+    /**
+     * Добавляет список рейсов в стор.
+     * Если рейс с номером уже существует его нужно заменить на новый
+     *
+     * @param flights - список рейсов
+     */
+    public static void addFlightsToStore(Set<Flight> flights) {
+    }
+
+    /**
+     * Удаляет рейс по номеру
+     *
+     * @param flightNo - номер рейса
+     * @return true - если рейс удален, false - если рейс не был найден или по другой причине не может быть удален
+     */
+    public static boolean deleteFromStore(long flightNo) {
+        return false;
+    }
+
+    private FlightStore() {
         throw new UnsupportedOperationException();
     }
 }
