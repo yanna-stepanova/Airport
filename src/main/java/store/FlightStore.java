@@ -2,6 +2,7 @@ package store;
 
 import model.Flight;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -49,7 +50,7 @@ public final class FlightStore {
      * @return - flightStore, все доступные рейсы
      */
     public static List<Flight> getFlightStore() {
-        return null;
+        return flightStore;
     }
 
     /**
@@ -59,6 +60,19 @@ public final class FlightStore {
      * @param flights - список рейсов
      */
     public static void addFlightsToStore(Set<Flight> flights) {
+        boolean isAdded = false;
+        Iterator<Flight> flightIterator = flights.iterator();
+        while (flightIterator.hasNext()){
+            for (int i=0; i<flightStore.size(); i++){
+                if(flightStore.get(i).getFlightNo()==flightIterator.next().getFlightNo()){
+                    flightStore.set(i, flightIterator.next());
+                    isAdded = true;
+                }
+            }
+            if(!isAdded){
+                flightStore.add(flightIterator.next());
+            }
+        }
     }
 
     /**
@@ -68,7 +82,16 @@ public final class FlightStore {
      * @return true - если рейс удален, false - если рейс не был найден или по другой причине не может быть удален
      */
     public static boolean deleteFromStore(long flightNo) {
-        return false;
+        boolean isDeleted = false;
+        Iterator<Flight> iterStore = flightStore.iterator();
+        while (iterStore.hasNext()){
+            if (iterStore.next().getFlightNo()==flightNo){
+                iterStore.remove();
+                isDeleted=true;
+                break;
+            }
+        }
+        return isDeleted;
     }
 
     private FlightStore() {

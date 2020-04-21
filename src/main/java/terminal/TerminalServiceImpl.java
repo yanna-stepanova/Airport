@@ -4,10 +4,9 @@ import model.Flight;
 
 import java.util.Set;
 
-/**
- *
- */
 public class TerminalServiceImpl implements TerminalService {
+
+
     @Override
     public void addAllFlights(Set<Flight> flights) {
     }
