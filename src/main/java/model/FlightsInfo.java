@@ -5,14 +5,10 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class FlightsInfo {
-    private Set<Flight> flights = new HashSet<>();  // рейсы для которых будет отображаться информация
+    private Set<Flight> flightsInfo = new HashSet<>();  // рейсы для которых будет отображаться информация
 
     public FlightsInfo(Set<Flight> flights) {
-        Iterator<Flight> iteratorFlights = flights.iterator();
-        while (iteratorFlights.hasNext()) {
-            this.flights.add(new Flight(iteratorFlights.next().getFlightNo(), iteratorFlights.next().getDeparture(),
-                    iteratorFlights.next().getDestination()));
-        }
+        this.flightsInfo.addAll(flights);
     }
 
     /**
@@ -29,16 +25,17 @@ public class FlightsInfo {
      */
     @Override
     public String toString() {
-        do {
-            return String.format(".____________________.____________________.____________________.\n" +
-                            "| Flight #           | Departure          | Destination        |\n" +
-                            "|--------------------|--------------------|--------------------|\n" +
-                            "|%1$-20d|%2$-20s|%3$-20s|\n" +
-                            "|____________________|____________________|____________________|",
-                    flights.iterator().next().getFlightNo(), flights.iterator().next().getDeparture(),
-                    flights.iterator().next().getDestination());
+        String strInfo =  String.format(".____________________.____________________.____________________.\n" +
+                                        "| Flight #           | Departure          | Destination        |\n" +
+                                        "|--------------------|--------------------|--------------------|\n");
+        Iterator<Flight> iterInfo = flightsInfo.iterator();
+        while (iterInfo.hasNext()){
+            Flight objectItem= iterInfo.next();
+            strInfo = strInfo.concat(String.format("|%1$-20d|%2$-20s|%3$-20s|\n",
+                    objectItem.getFlightNo(), objectItem.getDeparture(), objectItem.getDestination()));
         }
-        while (flights.iterator().hasNext());
+        strInfo = strInfo.concat(String.format("|____________________|____________________|____________________|"));
+        return strInfo;
     }
 
 }
