@@ -5,10 +5,11 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class FlightsInfo {
-    private Set<Flight> flightsInfo = new HashSet<>();  // рейсы для которых будет отображаться информация
+    private Set<Flight> flightsInfo;  // рейсы для которых будет отображаться информация
 
     public FlightsInfo(Set<Flight> flights) {
-        this.flightsInfo.addAll(flights);
+        flightsInfo = new HashSet<>();
+        flightsInfo.addAll(flights);
     }
 
     /**

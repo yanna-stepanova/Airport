@@ -2,16 +2,19 @@ import info.InfoCenterService;
 import info.InfoCenterServiceImpl;
 import model.Flight;
 import model.FlightsInfo;
+import store.FlightStore;
 import terminal.TerminalService;
 import terminal.TerminalServiceImpl;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Application {
     public static void main(String[] args) {
         //можно здесь писать код, чтобы проверить, что все ваши сервисы работают правильно
+        /*
         Set<Flight> flightsSet = new HashSet<>();
         flightsSet.add(new Flight(301, "Kiev", "Vienna"));
         flightsSet.add(new Flight(303, "Kiev", "Istanbul"));
@@ -21,34 +24,24 @@ public class Application {
         flightsSet.add(new Flight(201, "Kharkov", "Istanbul"));
         flightsSet.add(new Flight(407, "Vienna", "Krakow"));
         flightsSet.add(new Flight(405, "Vienna", "London"));
+         */
 
         TerminalService terminalService = new TerminalServiceImpl();
-        terminalService.addAllFlights(flightsSet);
+        terminalService.addAllFlights(new HashSet<Flight>(FlightStore.getFlightStore()));
         InfoCenterService infoCS = new InfoCenterServiceImpl(terminalService);
-        System.out.println("All flights:\n"+infoCS.getAllFlights().toString());
-        System.out.println("\nFrom Kiev:\n"+infoCS.getFlightsFrom("Kiev").toString());
+        System.out.println("All flights:\n" + infoCS.getAllFlights().toString());
 
-        FlightsInfo flFromKiev = new FlightsInfo(terminalService.getFlightByDeparture("Vienna"));
-        System.out.println("\nFlights from Vienna:\n"+flFromKiev.toString());
+        System.out.println("\nFlights from Vienna:\n" + infoCS.getFlightsFrom("Vienna").toString());
 
-        FlightsInfo flTo = new FlightsInfo(terminalService.getFlightByDestination("Istanbul"));
-        System.out.println("\nFlights to Istanbul:\n"+flTo.toString());
+        FlightsInfo flightsTo = new FlightsInfo(terminalService.getFlightByDestination("Istanbul"));
+        System.out.println("\nFlights to Istanbul:\n" + flightsTo.toString());
 
-        Flight flighFinded = terminalService.getFlightByNumber(202);
-        System.out.println("\nThe flight is '"+ flighFinded.getFlightNo() + "' from - "+ flighFinded.getDeparture()+
-                            ", to - " + flighFinded.getDestination());
-
-        terminalService.removeFlightByNumber(202);
+        Flight flightFound = terminalService.getFlightByNumber(901);
+        System.out.println("\nThe flight: '" + flightFound.getFlightNo() + "' from "
+                           + flightFound.getDeparture() + " to " + flightFound.getDestination()+", - will be deleted.");
+        terminalService.removeFlightByNumber(flightFound.getFlightNo());
         FlightsInfo flightsAfterRemove = new FlightsInfo(terminalService.getAllFlights());
-        System.out.println("\nFlights after remove '202':\n"+ flightsAfterRemove.toString());
-
-
-
-
-
-
-
-
+        System.out.println("Flights after remove:\n"+ flightsAfterRemove.toString());
 
     }
 }
