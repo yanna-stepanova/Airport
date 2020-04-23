@@ -2,10 +2,7 @@ package store;
 
 import model.Flight;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static store.Cities.BERLIN;
 import static store.Cities.ISTANBUL;
@@ -50,7 +47,7 @@ public final class FlightStore {
      * @return - flightStore, все доступные рейсы
      */
     public static List<Flight> getFlightStore() {
-        return flightStore;
+        return new ArrayList<>(flightStore);
     }
 
     /**
@@ -63,14 +60,15 @@ public final class FlightStore {
         boolean isAdded = false;
         Iterator<Flight> flightIterator = flights.iterator();
         while (flightIterator.hasNext()){
+            Flight iterObject = flightIterator.next();
             for (int i=0; i<flightStore.size(); i++){
-                if(flightStore.get(i).getFlightNo()==flightIterator.next().getFlightNo()){
-                    flightStore.set(i, flightIterator.next());
+                if(flightStore.get(i).getFlightNo()==iterObject.getFlightNo()){
+                    flightStore.set(i, iterObject);
                     isAdded = true;
                 }
             }
             if(!isAdded){
-                flightStore.add(flightIterator.next());
+                flightStore.add(iterObject);
             }
         }
     }
