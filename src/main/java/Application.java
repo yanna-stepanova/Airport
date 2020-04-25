@@ -6,10 +6,10 @@ import store.FlightStore;
 import terminal.TerminalService;
 import terminal.TerminalServiceImpl;
 
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
+import static store.Cities.ISTANBUL;
+import static store.Cities.VIENNA;
 
 public class Application {
     public static void main(String[] args) {
@@ -31,17 +31,17 @@ public class Application {
         InfoCenterService infoCS = new InfoCenterServiceImpl(terminalService);
         System.out.println("All flights:\n" + infoCS.getAllFlights().toString());
 
-        System.out.println("\nFlights from Vienna:\n" + infoCS.getFlightsFrom("Vienna").toString());
+        System.out.println("\nFlights from Vienna:\n" + infoCS.getFlightsFrom(VIENNA).toString());
 
-        FlightsInfo flightsTo = new FlightsInfo(terminalService.getFlightByDestination("Istanbul"));
+        FlightsInfo flightsTo = new FlightsInfo(terminalService.getFlightByDestination(ISTANBUL));
         System.out.println("\nFlights to Istanbul:\n" + flightsTo.toString());
 
         Flight flightFound = terminalService.getFlightByNumber(901);
         System.out.println("\nThe flight: '" + flightFound.getFlightNo() + "' from "
-                           + flightFound.getDeparture() + " to " + flightFound.getDestination()+", - will be deleted.");
+                + flightFound.getDeparture() + " to " + flightFound.getDestination() + ", - will be deleted.");
         terminalService.removeFlightByNumber(flightFound.getFlightNo());
         FlightsInfo flightsAfterRemove = new FlightsInfo(terminalService.getAllFlights());
-        System.out.println("Flights after remove:\n"+ flightsAfterRemove.toString());
+        System.out.println("Flights after remove:\n" + flightsAfterRemove.toString());
 
     }
 }

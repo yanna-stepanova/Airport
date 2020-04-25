@@ -26,12 +26,12 @@ public class FlightsInfo {
      */
     @Override
     public String toString() {
-        String strInfo =  String.format(".____________________.____________________.____________________.\n" +
-                                        "| Flight #           | Departure          | Destination        |\n" +
-                                        "|--------------------|--------------------|--------------------|\n");
+        String strInfo = String.format(".____________________.____________________.____________________.\n" +
+                "| Flight #           | Departure          | Destination        |\n" +
+                "|--------------------|--------------------|--------------------|\n");
         Iterator<Flight> iterInfo = flightsInfo.iterator();
-        while (iterInfo.hasNext()){
-            Flight objectItem= iterInfo.next();
+        while (iterInfo.hasNext()) {
+            Flight objectItem = iterInfo.next();
             strInfo = strInfo.concat(String.format("|%1$-20d|%2$-20s|%3$-20s|\n",
                     objectItem.getFlightNo(), objectItem.getDeparture(), objectItem.getDestination()));
         }
