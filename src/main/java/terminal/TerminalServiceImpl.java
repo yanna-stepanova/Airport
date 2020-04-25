@@ -65,12 +65,9 @@ public class TerminalServiceImpl implements TerminalService {
     public boolean removeFlightByNumber(long flightNo) {
         if (!isTerminalEmpty()) {
             if (FlightStore.deleteFromStore(flightNo)) {
-
-               // getAllFlights().remove(getFlightByNumber(flightNo));
                 return true;
             }
-
         }
-        return false;
+        return FlightStore.deleteFromStore(flightNo);
     }
 }
