@@ -1,28 +1,26 @@
 package model;
 
 public class Flight {
+    private final long flightNo;        // номер рейса
+     private final String departure;    // место отправления
+     private final String destination;  // место брибытия
 
-    /**
-     * Конструктор принимает три обязательные параметра
-     *
-     * @param flightNo - номер рейса. Этот параметр не может быть изменен (final)
-     * @param departure - место отправления. Этот параметр не может быть изменен (final)
-     * @param destination - место брибытия. Этот параметр не может быть изменен (final)
-     */
     public Flight(long flightNo, String departure, String destination){
-
+        this.flightNo = flightNo;
+        this.departure = departure;
+        this.destination = destination;
     }
 
     public long getFlightNo() {
-        return 0;
+        return flightNo;
     }
 
     public String getDeparture() {
-        return null;
+        return departure;
     }
 
     public String getDestination() {
-        return null;
+        return destination;
     }
 
 

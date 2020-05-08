@@ -2,9 +2,7 @@ package store;
 
 import model.Flight;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static store.Cities.BERLIN;
 import static store.Cities.ISTANBUL;
@@ -49,7 +47,7 @@ public final class FlightStore {
      * @return - flightStore, все доступные рейсы
      */
     public static List<Flight> getFlightStore() {
-        return null;
+        return new ArrayList<>(flightStore);
     }
 
     /**
@@ -59,6 +57,20 @@ public final class FlightStore {
      * @param flights - список рейсов
      */
     public static void addFlightsToStore(Set<Flight> flights) {
+        boolean isAdded = false;
+        Iterator<Flight> flightIterator = flights.iterator();
+        while (flightIterator.hasNext()){
+            Flight iterObject = flightIterator.next();
+            for (int i=0; i<flightStore.size(); i++){
+                if(flightStore.get(i).getFlightNo()==iterObject.getFlightNo()){
+                    flightStore.set(i, iterObject);
+                    isAdded = true;
+                }
+            }
+            if(!isAdded){
+                flightStore.add(iterObject);
+            }
+        }
     }
 
     /**
@@ -68,7 +80,16 @@ public final class FlightStore {
      * @return true - если рейс удален, false - если рейс не был найден или по другой причине не может быть удален
      */
     public static boolean deleteFromStore(long flightNo) {
-        return false;
+        boolean isDeleted = false;
+        Iterator<Flight> iterStore = flightStore.iterator();
+        while (iterStore.hasNext()){
+            if (iterStore.next().getFlightNo()==flightNo){
+                iterStore.remove();
+                isDeleted=true;
+                break;
+            }
+        }
+        return isDeleted;
     }
 
     private FlightStore() {

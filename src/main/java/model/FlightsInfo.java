@@ -1,16 +1,15 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class FlightsInfo {
+    private Set<Flight> flightsInfo;  // рейсы для которых будет отображаться информация
 
-    /**
-     * Конструктор принимает список рейсов
-     *
-     * @param flights - рейсы для которых будет отображаться информация
-     */
     public FlightsInfo(Set<Flight> flights) {
-
+        flightsInfo = new HashSet<>();
+        flightsInfo.addAll(flights);
     }
 
     /**
@@ -27,6 +26,17 @@ public class FlightsInfo {
      */
     @Override
     public String toString() {
-        return null;
+        String strInfo = String.format(".____________________.____________________.____________________.\n" +
+                "| Flight #           | Departure          | Destination        |\n" +
+                "|--------------------|--------------------|--------------------|\n");
+        Iterator<Flight> iterInfo = flightsInfo.iterator();
+        while (iterInfo.hasNext()) {
+            Flight objectItem = iterInfo.next();
+            strInfo = strInfo.concat(String.format("|%1$-20d|%2$-20s|%3$-20s|\n",
+                    objectItem.getFlightNo(), objectItem.getDeparture(), objectItem.getDestination()));
+        }
+        strInfo = strInfo.concat(String.format("|____________________|____________________|____________________|"));
+        return strInfo;
     }
+
 }
