@@ -53,7 +53,6 @@ public class Application {
 //        }
 
         System.out.println("\nSearching direct route: ");
-        SearchService searchService2 = new SearchServiceImpl(terminalService);
         System.out.println(searchService.findRoutes(LONDON, BERLIN, true));
 
 
