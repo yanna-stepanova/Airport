@@ -2,14 +2,15 @@ import info.InfoCenterService;
 import info.InfoCenterServiceImpl;
 import model.Flight;
 import model.FlightsInfo;
+import search.SearchService;
+import search.SearchServiceImpl;
 import store.FlightStore;
 import terminal.TerminalService;
 import terminal.TerminalServiceImpl;
 
 import java.util.HashSet;
 
-import static store.Cities.ISTANBUL;
-import static store.Cities.VIENNA;
+import static store.Cities.*;
 
 public class Application {
     public static void main(String[] args) {
@@ -42,6 +43,19 @@ public class Application {
         terminalService.removeFlightByNumber(flightFound.getFlightNo());
         FlightsInfo flightsAfterRemove = new FlightsInfo(terminalService.getAllFlights());
         System.out.println("Flights after remove:\n" + flightsAfterRemove.toString());
+
+
+        SearchService searchService = new SearchServiceImpl(terminalService);
+        System.out.println("\nSearching route from KHARKOV to NEW_YORK:");
+        System.out.println(searchService.findRoutes(KHARKOV, NEW_YORK));
+//        for (Route route: searchService.findRoutes(KHARKOV,NEW_YORK)) {
+//            System.out.println(route.toString());
+//        }
+
+        System.out.println("\nSearching direct route: ");
+        SearchService searchService2 = new SearchServiceImpl(terminalService);
+        System.out.println(searchService.findRoutes(LONDON, BERLIN, true));
+
 
     }
 }
